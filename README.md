@@ -1,1 +1,7 @@
-# SE_LAB5
+| Issue | Type | Line(s) | Description | Fix Approach |
+| :--- | :--- | :--- | :--- | :--- |
+| **Mutable default arg** | Bug (Pylint) | 7 | `logs=[]` is a mutable default. It gets shared across all calls to `addItem`. | Change the default to `None` and initialize `logs = []` inside the function if it's `None`. |
+| **Broad exception** | Bug (Pylint) | 16 | `except:` catches all possible exceptions, which is bad practice and can hide bugs. | Change `except:` to the specific `except KeyError:` to only catch errors when the item isn't in the dictionary. |
+| **Use of `eval`** | Security (Bandit) | 57 | `eval()` is a high-severity security risk because it can run arbitrary code. | Remove the entire line: `eval("print('eval used')")`. |
+| **Unsafe file handling** | Bug (Pylint) | 24, 29 | `open()` is used without `with`. If an error happens, `f.close()` might not be called, causing a resource leak. | Rewrite `loadData` and `saveData` to use the `with open(...) as f:` syntax, which handles closing the file automatically. |
+| **Unused import** | Style (Flake8) | 2 | `import logging` is present, but the `logging` module is never actually used in the code. | Remove the entire line `import logging` to clean up the code. |
